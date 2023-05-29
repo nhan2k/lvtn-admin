@@ -1,0 +1,42 @@
+<div class="container text-center">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="w-100" style="height: 10rem">
+          <img
+            src="assets/images/Schedule-Facebook-Posts.jpg"
+            class="card-img-top w-100 h-100"
+            style="object-fit: cover; object-position: center"
+            alt="..."
+          />
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Tổng số tin</h5>
+          <p class="card-text">{{ postCounts ?? undefined }}</p>
+          <a [routerLink]="['/dashboard/posts']" class="btn btn-primary"
+            >Quản lý tin</a
+          >
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="w-100" style="height: 10rem">
+          <img
+            src="assets/images/Google_account_icon.svg.png"
+            class="card-img-top w-100 h-100"
+            style="object-fit: cover; object-position: center"
+            alt="..."
+          />
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Tổng số tài khoản</h5>
+          <p class="card-text">{{ userCounts ?? undefined }}</p>
+          <a [routerLink]="['/dashboard/accounts']" class="btn btn-primary"
+            >Quản lý tài khoản</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

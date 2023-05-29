@@ -1,0 +1,28 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Tiêu đề</th>
+      <th scope="col">Trạng thái</th>
+      <th scope="col">Duyệt</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let post of posts; index as i">
+      <td scope="row">{{ post?.title }}</td>
+      <td>{{ post?.status | postStatus }}</td>
+      <td>{{ post?.isReview | postIsReview }}</td>
+      <td>
+        <div class="flex">
+          <button
+            class="btn btn-primary"
+            [routerLink]="['/dashboard/post-detail']"
+            [queryParams]="{ id: post?._id }"
+          >
+            <i class="bi bi-eyeglasses"></i> Xem
+          </button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

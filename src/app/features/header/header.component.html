@@ -1,0 +1,24 @@
+<nav class="navbar bg-body-tertiary">
+  <div class="container-fluid">
+    <a
+      class="navbar-brand fs-4 border border-warning px-4 rounded-pill d-flex align-items-center"
+      ><i class="bi bi-house-door"></i> <em>STU</em></a
+    >
+    <div class="btn-group">
+      <button
+        type="button"
+        class="btn btn-outline-info rounded"
+        data-bs-toggle="dropdown"
+        data-bs-display="static"
+        aria-expanded="false"
+      >
+        <i class="bi bi-person-circle"></i>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
+        <li>
+          <button class="dropdown-item" (click)="onClick()">Đăng xuất</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

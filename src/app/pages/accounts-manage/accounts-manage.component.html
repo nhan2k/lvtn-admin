@@ -1,0 +1,108 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Số điện thoại</th>
+      <th scope="col">Họ tên</th>
+      <th scope="col">Trạng thái</th>
+      <th scope="col">Loại</th>
+      <th scope="col">Số bài đăng</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users; index as i">
+      <td scope="row">{{ user.phoneNumber }}</td>
+      <td>{{ user.fullName }}</td>
+      <td>{{ user.status | userStatus }}</td>
+      <td>{{ user.type }}</td>
+      <td>{{ user.numberOfposts }}</td>
+      <td>
+        <button
+          *ngIf="user.status === 'active'; else template"
+          class="btn btn-outline-danger"
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-target="#active"
+        >
+          <i class="bi bi-flag"></i>
+        </button>
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="active"
+          tabindex="-1"
+          aria-labelledby="activeLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-body">Bạn có chắc muốn cấm tài khoản này?</div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Đóng
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  (click)="onClickupdateStatus(user?._id, user?.status)"
+                  data-bs-dismiss="modal"
+                >
+                  Xác nhận
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <ng-template #template>
+          <button
+            class="btn btn-outline-success"
+            (click)="onClickupdateStatus(user?._id, user?.status)"
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#inActive"
+          >
+            <i class="bi bi-pencil-square"></i>
+          </button>
+          <!-- Modal -->
+          <div
+            class="modal fade"
+            id="inActive"
+            tabindex="-1"
+            aria-labelledby="inActiveLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-body">
+                  Bạn có chắc muốn khôi phục tài khoản này?
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Đóng
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="onClickupdateStatus(user?._id, user?.status)"
+                    data-bs-dismiss="modal"
+                  >
+                    Xác nhận
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </td>
+    </tr>
+  </tbody>
+</table>
