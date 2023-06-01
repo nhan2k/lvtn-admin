@@ -5,7 +5,13 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class postStatusPipe implements PipeTransform {
   transform(value: any, ...args: any[]): any {
-    return value === 'hide' ? 'Đang ẩn' : 'Đang hiện';
+    return value === 'hide'
+      ? 'Đang ẩn'
+      : value === 'show'
+      ? 'Đang hiện'
+      : value === 'denined'
+      ? 'Từ chối'
+      : 'Hết hạn';
   }
 }
 

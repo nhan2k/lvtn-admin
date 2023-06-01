@@ -31,7 +31,7 @@ export class PostService {
 
   public getAll(): Observable<any> {
     try {
-      return this.httpClient.get(`${environment.apiUrl}/post/user`);
+      return this.httpClient.get(`${environment.apiUrl}/post/admin`);
     } catch (error) {
       throw new Error((error as any).message);
     }

@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
     private readonly notifyService: NotifyService,
     private readonly postService: PostService,
     private readonly userService: UserService,
-    private readonly toastr: ToastrService,
+    private readonly toastrService: ToastrService,
     private readonly socket: Socket,
     private readonly loadingService: LoadingService,
     private readonly authService: AuthService
@@ -28,16 +28,26 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.loadingService.setLoading(true);
     if (this.authService.getToken()) {
-      this.postService
-        .count()
-        .subscribe((count: number) => (this.postCounts = count));
+      this.postService.count().subscribe(
+        (count: number) => (this.postCounts = count),
+        (error) => {
+          this.toastrService.error('Đã có lỗi xảy ra vui lòng thử lại');
+          this.loadingService.setLoading(false);
+        }
+      );
 
-      this.userService.count().subscribe((count: number) => {
-        this.userCounts = count;
-        this.loadingService.setLoading(false);
-      });
+      this.userService.count().subscribe(
+        (count: number) => {
+          this.userCounts = count;
+          this.loadingService.setLoading(false);
+        },
+        (error) => {
+          this.toastrService.error('Đã có lỗi xảy ra vui lòng thử lại');
+          this.loadingService.setLoading(false);
+        }
+      );
       this.socket.on('notifyReceive', (data: string) => {
-        this.toastr.info(data);
+        this.toastrService.info(data);
       });
     }
 

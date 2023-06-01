@@ -1,7 +1,7 @@
 import { LoadingService } from '@core/services/loading.service';
 import { PostService } from './../../core/services/post.service';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-post-manage',
@@ -14,14 +14,20 @@ export class PostManageComponent implements OnInit {
   constructor(
     private readonly postService: PostService,
     private readonly loadingService: LoadingService,
-    private readonly router: Router
+    private readonly toastrService: ToastrService
   ) {}
 
   ngOnInit(): void {
     this.loadingService.setLoading(true);
-    this.postService.getAll().subscribe((data: any[]) => {
-      this.posts = [...data];
-      this.loadingService.setLoading(false);
-    });
+    this.postService.getAll().subscribe(
+      (data: any[]) => {
+        this.posts = [...data];
+        this.loadingService.setLoading(false);
+      },
+      (error) => {
+        this.toastrService.error('Đã có lỗi xảy ra vui lòng thử lại');
+        this.loadingService.setLoading(false);
+      }
+    );
   }
 }

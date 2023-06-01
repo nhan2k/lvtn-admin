@@ -10,15 +10,15 @@
           <div class="carousel-inner">
             <div
               *ngFor="let item of post?.imagePath; index as i"
-              class="carousel-item active mx-auto"
-              [class.my_class]="{ active: i === 0 }"
+              class="carousel-item"
+              [ngClass]="{ active: i === 0 }"
               style="width: 50rem; height: 30rem"
             >
               <img
-                [src]="'http://localhost:3000/' + item"
+                [src]="endpointURL + '/' + item"
                 class="d-block w-100 h-100"
                 style="object-fit: cover; object-position: center"
-                [alt]="'http://localhost:3000/' + item"
+                [alt]="endpointURL + '/' + item"
               />
             </div>
           </div>
@@ -46,10 +46,17 @@
           <p class="card-text" [innerHTML]="post?.content"></p>
           <a
             *ngIf="!post?.isReview"
-            class="btn btn-primary"
+            class="btn btn-primary me-3"
             data-bs-toggle="modal"
             data-bs-target="#review"
             >Duyệt tin</a
+          >
+          <a
+            *ngIf="!post?.isReview"
+            class="btn btn-danger"
+            data-bs-toggle="modal"
+            data-bs-target="#denined"
+            >Từ chối</a
           >
         </div>
       </div>
@@ -108,9 +115,47 @@
         <button
           type="button"
           class="btn btn-primary"
-          (click)="onClickApproved()"
+          (click)="onClickApproved('show')"
+          data-bs-dismiss="modal"
         >
           Duyệt
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="denined"
+  tabindex="-1"
+  aria-labelledby="deninedLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="deninedLabel">Từ chối</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">Bạn có chắc muốn từ chối này?</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Đóng
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger"
+          (click)="onClickApproved('denined')"
+          data-bs-dismiss="modal"
+        >
+          Xác nhận
         </button>
       </div>
     </div>
