@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingService } from '@core/services/loading.service';
 import { PostService } from '@core/services/post.service';
 import { environment } from '@environment/environment.development';
+import { Socket } from 'ngx-socket-io';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -20,7 +21,8 @@ export class PostDetailComponent implements OnInit {
     private readonly postService: PostService,
     private readonly loadingService: LoadingService,
     private readonly toastrService: ToastrService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly socket: Socket
   ) {}
   ngOnInit(): void {
     this.route.queryParams.subscribe(
@@ -49,17 +51,18 @@ export class PostDetailComponent implements OnInit {
     const data = {
       isReview: true,
       status,
+      isAdmin: true,
     };
-    this.postService.approved(this.id, data).subscribe(
-      (data) => {
+    this.postService.approved(this.id, data).subscribe({
+      next: (data) => {
         this.loadingService.setLoading(false);
         this.toastrService.success('Duyệt tin thành công');
         this.router.navigate(['/dashboard/posts']);
       },
-      (error) => {
+      error: (error) => {
         this.toastrService.error('Đã có lỗi xảy ra vui lòng thử lại');
         this.loadingService.setLoading(false);
-      }
-    );
+      },
+    });
   }
 }
