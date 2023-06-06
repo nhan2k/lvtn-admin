@@ -41,9 +41,20 @@
             <span class="visually-hidden">Next</span>
           </button>
         </div>
-        <div class="card-body">
-          <h5 class="card-title">{{ post?.title }}</h5>
+        <div class="card-body text-start">
+          <h4 class="card-title mt-3">{{ post?.title }}</h4>
+          <h5 class="card-title text-danger mb-3">
+            {{ post?.totalPrice | postCurrency }}
+          </h5>
+          <h5>Mô tả chi tiết</h5>
           <p class="card-text" [innerHTML]="post?.content"></p>
+          <div class="row gy-2">
+            <div *ngFor="let key of Object.keys(objCategory)" class="col-6">
+              <span>{{ key | keyOfCategory }}</span
+              >:
+              {{ objCategory[key] }}
+            </div>
+          </div>
           <a
             *ngIf="!post?.isReview"
             class="btn btn-primary me-3"
@@ -136,7 +147,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="deninedLabel">Từ chối</h1>
+        <h1 class="modal-title fs-5" id="deninedLabel">Từ chối tin đăng</h1>
         <button
           type="button"
           class="btn-close"
@@ -144,7 +155,17 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body">Bạn có chắc muốn từ chối này?</div>
+      <div class="modal-body">
+        <div class="mb-3 text-start">
+          <label for="exampleInputEmail1" class="form-label"
+            >Lý do<span class="text-danger">*</span></label
+          >
+          <textarea
+            (change)="reasonChange($event)"
+            class="form-control"
+          ></textarea>
+        </div>
+      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
           Đóng

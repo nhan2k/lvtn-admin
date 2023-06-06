@@ -15,14 +15,17 @@ export class PostDetailComponent implements OnInit {
   id: string | null = null;
   post: any;
   endpointURL: string = environment.imgUrl;
+  objCategory: Object | any = {};
+  Object = Object;
+
+  reason: string | null = null;
 
   constructor(
     private readonly route: ActivatedRoute,
     private readonly postService: PostService,
     private readonly loadingService: LoadingService,
     private readonly toastrService: ToastrService,
-    private readonly router: Router,
-    private readonly socket: Socket
+    private readonly router: Router
   ) {}
   ngOnInit(): void {
     this.route.queryParams.subscribe(
@@ -32,6 +35,14 @@ export class PostDetailComponent implements OnInit {
         this.postService.getOne(params['id']).subscribe(
           (data) => {
             this.post = data;
+
+            for (const key in data) {
+              if (Object.prototype.hasOwnProperty.call(data, key)) {
+                if (key.includes('PostId') && data[key]) {
+                  this.objCategory = data[key];
+                }
+              }
+            }
           },
           (error) => {
             this.toastrService.error('Đã có lỗi xảy ra vui lòng thử lại');
@@ -48,11 +59,16 @@ export class PostDetailComponent implements OnInit {
 
   onClickApproved(status: string) {
     this.loadingService.setLoading(true);
-    const data = {
+    const data: any = {
       isReview: true,
       status,
       isAdmin: true,
     };
+
+    if (status === 'denined') {
+      data.reason = this.reason;
+    }
+
     this.postService.approved(this.id, data).subscribe({
       next: (data) => {
         this.loadingService.setLoading(false);
@@ -64,5 +80,9 @@ export class PostDetailComponent implements OnInit {
         this.loadingService.setLoading(false);
       },
     });
+  }
+
+  reasonChange($event: Event) {
+    this.reason = ($event.target as any).value;
   }
 }

@@ -13,7 +13,7 @@ import {
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'chotot-client';
+  title = 'stu-tintot-admin';
 
   constructor(private readonly router: Router) {}
 }
