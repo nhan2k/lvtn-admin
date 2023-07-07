@@ -7,6 +7,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { NonAuthLayoutComponent } from '@shared/components/non-auth-layout/non-auth-layout.component';
 import { AuthLayoutComponent } from '@shared/components/auth-layout/auth-layout.component';
 import { PostDetailComponent } from './pages/post-detail/post-detail.component';
+import { PaymentComponent } from './pages/payment/payment.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,10 @@ const routes: Routes = [
       {
         path: 'accounts',
         component: AccountsManageComponent,
+      },
+      {
+        path: 'payments',
+        component: PaymentComponent,
       },
     ],
   },

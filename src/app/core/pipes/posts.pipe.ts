@@ -140,3 +140,22 @@ export class postCurrencyPipe implements PipeTransform {
     }).format(value);
   }
 }
+
+type TPaymentValue = 'pending' | 'completed' | 'rejected';
+@Pipe({
+  name: 'paymentStatus',
+})
+export class paymentStatusPipe implements PipeTransform {
+  transform(value: TPaymentValue, ...args: any[]): any {
+    switch (value) {
+      case 'completed':
+        return 'Thành công';
+      case 'rejected':
+        return 'Từ chối';
+      case 'pending':
+        return 'Đang chờ';
+      default:
+        return;
+    }
+  }
+}

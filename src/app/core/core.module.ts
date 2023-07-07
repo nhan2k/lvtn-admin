@@ -6,6 +6,7 @@ import {
   postIsReviewPipe,
   keyOfCategoryPipe,
   postCurrencyPipe,
+  paymentStatusPipe,
 } from './pipes/posts.pipe';
 import { userStatusPipe } from './pipes/users.pipe';
 
@@ -16,6 +17,7 @@ import { userStatusPipe } from './pipes/users.pipe';
     userStatusPipe,
     keyOfCategoryPipe,
     postCurrencyPipe,
+    paymentStatusPipe,
   ],
   imports: [CommonModule, TokenModule],
   exports: [
@@ -25,6 +27,7 @@ import { userStatusPipe } from './pipes/users.pipe';
     userStatusPipe,
     keyOfCategoryPipe,
     postCurrencyPipe,
+    paymentStatusPipe,
   ],
 })
 export class CoreModule {}

@@ -1,0 +1,120 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Số điện thoại</th>
+      <th scope="col">Trạng thái</th>
+      <th scope="col">Số tiền nạp</th>
+      <th scope="col">Ngày tạo</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of payments">
+      <td>{{ item?.userId?.phoneNumber }}</td>
+      <td>{{ item?.status | paymentStatus }}</td>
+      <td>{{ item?.coin | postCurrency }}</td>
+      <td>{{ item?.createdAt | date : "dd/MM/yyyy h:mm a" }}</td>
+      <td *ngIf="item?.status === 'pending'">
+        <button
+          class="btn btn-primary me-2"
+          data-bs-toggle="modal"
+          data-bs-target="#review"
+          (click)="onClick(item?._id)"
+        >
+          Duyệt
+        </button>
+        <button
+          class="btn btn-danger"
+          data-bs-toggle="modal"
+          data-bs-target="#denined"
+        >
+          Từ chối
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="review"
+  tabindex="-1"
+  aria-labelledby="reviewLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="reviewLabel">Duyệt tin</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">Bạn có chắc muốn duyệt tin này?</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Đóng
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="onClickApproved('completed')"
+          data-bs-dismiss="modal"
+        >
+          Duyệt
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="denined"
+  tabindex="-1"
+  aria-labelledby="deninedLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="deninedLabel">Từ chối tin đăng</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3 text-start">
+          <label for="exampleInputEmail1" class="form-label"
+            >Lý do<span class="text-danger">*</span></label
+          >
+          <textarea
+            (change)="reasonChange($event)"
+            class="form-control"
+          ></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Đóng
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger"
+          (click)="onClickApproved('rejected')"
+          data-bs-dismiss="modal"
+        >
+          Xác nhận
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

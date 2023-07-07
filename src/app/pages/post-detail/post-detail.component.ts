@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingService } from '@core/services/loading.service';
 import { PostService } from '@core/services/post.service';
 import { environment } from '@environment/environment.development';
-import { Socket } from 'ngx-socket-io';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -40,6 +39,12 @@ export class PostDetailComponent implements OnInit {
               if (Object.prototype.hasOwnProperty.call(data, key)) {
                 if (key.includes('PostId') && data[key]) {
                   this.objCategory = data[key];
+                  if (data[key]?.address) {
+                    (this.objCategory as any).address =
+                      data[key]?.address?.address +
+                      data[key]?.address?.district +
+                      data[key]?.address?.province;
+                  }
                 }
               }
             }

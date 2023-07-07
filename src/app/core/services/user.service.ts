@@ -43,4 +43,23 @@ export class UserService {
       throw new Error((error as any).message);
     }
   }
+
+  public getPayments() {
+    try {
+      return this.httpClient.get(`${environment.apiUrl}/user/payment`);
+    } catch (error) {
+      throw new Error((error as any).message);
+    }
+  }
+
+  public updatePayments(id: string, data: { status: string }) {
+    try {
+      return this.httpClient.patch(
+        `${environment.apiUrl}/user/payment/${id}`,
+        data
+      );
+    } catch (error) {
+      throw new Error((error as any).message);
+    }
+  }
 }

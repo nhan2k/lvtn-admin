@@ -19,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ToastrModule } from 'ngx-toastr';
 import { PostDetailComponent } from './pages/post-detail/post-detail.component';
+import { PaymentComponent } from './pages/payment/payment.component';
 
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
@@ -35,6 +36,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     AuthLayoutComponent,
     NonAuthLayoutComponent,
     PostDetailComponent,
+    PaymentComponent,
   ],
   imports: [
     BrowserModule,
