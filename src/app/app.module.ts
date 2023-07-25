@@ -20,6 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { PostDetailComponent } from './pages/post-detail/post-detail.component';
 import { PaymentComponent } from './pages/payment/payment.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
@@ -44,9 +45,9 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     BrowserAnimationsModule,
     CoreModule,
     ReactiveFormsModule,
-
     ToastrModule.forRoot(),
     SocketIoModule.forRoot(config),
+    MatPaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

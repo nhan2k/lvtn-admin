@@ -1,9 +1,52 @@
 <table class="table table-striped">
   <thead>
+    <th scope="col">
+      <div class="d-flex">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Tìm kiếm theo tiêu đề"
+          (keyup)="onChangeSearch($event.target)"
+        />
+        <button class="btn btn-primary" (click)="onClickSearch()">
+          search
+        </button>
+      </div>
+    </th>
+  </thead>
+  <thead>
     <tr>
       <th scope="col">Tiêu đề</th>
-      <th scope="col">Trạng thái</th>
-      <th scope="col">Duyệt</th>
+      <th scope="col" class="cursor-pointer" (click)="onClickSort('status')">
+        Trạng thái
+        <i
+          class="bi bi-sort-alpha-down-alt"
+          *ngIf="name === 'status' && toggle; else templateName"
+        ></i>
+        <ng-template #templateName>
+          <i class="bi bi-sort-alpha-down"></i>
+        </ng-template>
+      </th>
+      <th scope="col" class="cursor-pointer" (click)="onClickSort('isReview')">
+        Duyệt
+        <i
+          class="bi bi-sort-alpha-down-alt"
+          *ngIf="name === 'isReview' && toggle; else templateName"
+        ></i>
+        <ng-template #templateName>
+          <i class="bi bi-sort-alpha-down"></i>
+        </ng-template>
+      </th>
+      <th scope="col" class="cursor-pointer" (click)="onClickSort('createdAt')">
+        Ngày tạo
+        <i
+          class="bi bi-sort-alpha-down-alt"
+          *ngIf="name === 'createdAt' && toggle; else templateName"
+        ></i>
+        <ng-template #templateName>
+          <i class="bi bi-sort-alpha-down"></i>
+        </ng-template>
+      </th>
       <th scope="col"></th>
     </tr>
   </thead>
@@ -12,6 +55,7 @@
       <td scope="row">{{ post?.title }}</td>
       <td>{{ post?.status | postStatus }}</td>
       <td>{{ post?.isReview | postIsReview }}</td>
+      <td>{{ post?.createdAt | date : "dd/MM h:mm a" }}</td>
       <td>
         <div class="flex">
           <button
@@ -26,3 +70,12 @@
     </tr>
   </tbody>
 </table>
+<div class="text-center" *ngIf="isPagination">
+  <mat-paginator
+    [length]="totalItems"
+    [pageSize]="pageSize"
+    aria-label="Select page"
+    (page)="onPageChange($event)"
+  >
+  </mat-paginator>
+</div>

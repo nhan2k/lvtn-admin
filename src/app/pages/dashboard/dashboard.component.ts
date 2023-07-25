@@ -13,8 +13,9 @@ import { AuthService } from '@core/services/auth.service';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  postCounts: number | undefined;
-  userCounts: number | undefined;
+  postCounts: number[] | undefined;
+  userCounts: number[] | undefined;
+  paymentCounts: number[] | undefined;
 
   constructor(
     private readonly notifyService: NotifyService,
@@ -28,24 +29,32 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.loadingService.setLoading(true);
     if (this.authService.getToken()) {
-      this.postService.count().subscribe(
-        (count: number) => (this.postCounts = count),
-        (error) => {
+      this.postService.count().subscribe({
+        next: (count: number[]) => (this.postCounts = count),
+        error: (error) => {
           this.toastrService.error('Đã có lỗi xảy ra vui lòng thử lại');
           this.loadingService.setLoading(false);
-        }
-      );
+        },
+      });
 
-      this.userService.count().subscribe(
-        (count: number) => {
+      this.userService.countPayment().subscribe({
+        next: (count: number[]) => (this.paymentCounts = count),
+        error: (error) => {
+          this.toastrService.error('Đã có lỗi xảy ra vui lòng thử lại');
+          this.loadingService.setLoading(false);
+        },
+      });
+
+      this.userService.count().subscribe({
+        next: (count: number[]) => {
           this.userCounts = count;
           this.loadingService.setLoading(false);
         },
-        (error) => {
+        error: (error) => {
           this.toastrService.error('Đã có lỗi xảy ra vui lòng thử lại');
           this.loadingService.setLoading(false);
-        }
-      );
+        },
+      });
       this.socket.on('notifyReceive', (data: string) => {
         this.toastrService.info(data);
       });

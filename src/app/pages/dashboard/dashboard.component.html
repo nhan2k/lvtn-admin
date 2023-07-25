@@ -1,5 +1,6 @@
 <div class="container text-center">
-  <div class="row">
+  <h1>Tin Đăng</h1>
+  <div class="row mb-3">
     <div class="col">
       <div class="card">
         <div class="w-100" style="height: 10rem">
@@ -12,9 +13,65 @@
         </div>
         <div class="card-body">
           <h5 class="card-title">Tổng số tin</h5>
-          <p class="card-text">{{ postCounts ?? undefined }}</p>
+          <p class="card-text">{{ postCounts?.[0] ?? undefined }}</p>
           <a [routerLink]="['/dashboard/posts']" class="btn btn-primary"
             >Quản lý tin</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card">
+        <div class="w-100" style="height: 10rem">
+          <img
+            src="assets/images/Schedule-Facebook-Posts.jpg"
+            class="card-img-top w-100 h-100"
+            style="object-fit: cover; object-position: center"
+            alt="..."
+          />
+        </div>
+        <div class="card-body" style="height: 8.8rem">
+          <h5 class="card-title">Số bài đăng được hiển thị</h5>
+          <p class="card-text">{{ postCounts?.[1] ?? undefined }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="w-100" style="height: 10rem">
+          <img
+            src="assets/images/Schedule-Facebook-Posts.jpg"
+            class="card-img-top w-100 h-100"
+            style="object-fit: cover; object-position: center"
+            alt="..."
+          />
+        </div>
+        <div class="card-body" style="height: 8.8rem">
+          <h5 class="card-title">Số bài đăng bị từ chối</h5>
+          <p class="card-text">{{ postCounts?.[2] ?? undefined }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h1>Tài khoản</h1>
+  <div class="row mb-3">
+    <div class="col">
+      <div class="card">
+        <div class="w-100" style="height: 10rem">
+          <img
+            src="assets/images/Google_account_icon.svg.png"
+            class="card-img-top w-100 h-100"
+            style="object-fit: cover; object-position: center"
+            alt="..."
+          />
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Tổng số tài khoản</h5>
+          <p class="card-text">{{ userCounts?.[0] ?? undefined }}</p>
+          <a [routerLink]="['/dashboard/accounts']" class="btn btn-primary"
+            >Quản lý tài khoản</a
           >
         </div>
       </div>
@@ -29,12 +86,80 @@
             alt="..."
           />
         </div>
+        <div class="card-body" style="height: 8.8rem">
+          <h5 class="card-title">Số tài khoản đang hoạt động</h5>
+          <p class="card-text">{{ userCounts?.[1] ?? undefined }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="w-100" style="height: 10rem">
+          <img
+            src="assets/images/Google_account_icon.svg.png"
+            class="card-img-top w-100 h-100"
+            style="object-fit: cover; object-position: center"
+            alt="..."
+          />
+        </div>
+        <div class="card-body" style="height: 8.8rem">
+          <h5 class="card-title">Số tài khoản bị khóa</h5>
+          <p class="card-text">{{ userCounts?.[2] ?? undefined }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h1>Giao dịch</h1>
+  <div class="row mb-3">
+    <div class="col">
+      <div class="card">
+        <div class="w-100" style="height: 10rem">
+          <img
+            src="assets/images/transaction.jpg"
+            class="card-img-top w-100 h-100"
+            style="object-fit: cover; object-position: center"
+            alt="..."
+          />
+        </div>
         <div class="card-body">
-          <h5 class="card-title">Tổng số tài khoản</h5>
-          <p class="card-text">{{ userCounts ?? undefined }}</p>
-          <a [routerLink]="['/dashboard/accounts']" class="btn btn-primary"
-            >Quản lý tài khoản</a
+          <h5 class="card-title">Tổng số giao dịch</h5>
+          <p class="card-text">{{ paymentCounts?.[0] ?? undefined }}</p>
+          <a [routerLink]="['/dashboard/payments']" class="btn btn-primary"
+            >Quản lý giao dịch</a
           >
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="w-100" style="height: 10rem">
+          <img
+            src="assets/images/transaction.jpg"
+            class="card-img-top w-100 h-100"
+            style="object-fit: cover; object-position: center"
+            alt="..."
+          />
+        </div>
+        <div class="card-body" style="height: 8.8rem">
+          <h5 class="card-title">Số giao dịch chờ duyệt</h5>
+          <p class="card-text">{{ paymentCounts?.[1] ?? undefined }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="w-100" style="height: 10rem">
+          <img
+            src="assets/images/transaction.jpg"
+            class="card-img-top w-100 h-100"
+            style="object-fit: cover; object-position: center"
+            alt="..."
+          />
+        </div>
+        <div class="card-body" style="height: 8.8rem">
+          <h5 class="card-title">Số giao dịch thành công</h5>
+          <p class="card-text">{{ paymentCounts?.[2] ?? undefined }}</p>
         </div>
       </div>
     </div>

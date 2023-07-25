@@ -62,4 +62,12 @@ export class UserService {
       throw new Error((error as any).message);
     }
   }
+
+  public countPayment(): Observable<any> {
+    try {
+      return this.httpClient.get(`${environment.apiUrl}/user/count/payment`);
+    } catch (error) {
+      throw new Error((error as any).message);
+    }
+  }
 }

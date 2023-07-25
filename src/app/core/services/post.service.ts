@@ -29,9 +29,13 @@ export class PostService {
     }
   }
 
-  public getAll(): Observable<any> {
+  public getAll(currentPage: number): Observable<any> {
     try {
-      return this.httpClient.get(`${environment.apiUrl}/post/admin`);
+      return this.httpClient.get(`${environment.apiUrl}/post/admin`, {
+        params: {
+          pageNumber: currentPage,
+        },
+      });
     } catch (error) {
       throw new Error((error as any).message);
     }
@@ -40,6 +44,33 @@ export class PostService {
   public getOne(id: string): Observable<any> {
     try {
       return this.httpClient.get(`${environment.apiUrl}/post/${id}`);
+    } catch (error) {
+      throw new Error((error as any).message);
+    }
+  }
+
+  public getAllAndSorting(sort: {
+    name?: string;
+    orderBy?: string;
+  }): Observable<any> {
+    try {
+      return this.httpClient.get(`${environment.apiUrl}/post/sort`, {
+        params: {
+          ...sort,
+          pageNumber: 1,
+          pageSize: 10,
+        },
+      });
+    } catch (error) {
+      throw new Error((error as any).message);
+    }
+  }
+
+  public search(filterParams: any): Observable<any> {
+    try {
+      return this.httpClient.get(`${environment.apiUrl}/post/search`, {
+        params: filterParams,
+      });
     } catch (error) {
       throw new Error((error as any).message);
     }
